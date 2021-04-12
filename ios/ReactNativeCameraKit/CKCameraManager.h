@@ -12,4 +12,7 @@
 
 @interface CKCameraManager : RCTViewManager
 
+
+
+
 @end

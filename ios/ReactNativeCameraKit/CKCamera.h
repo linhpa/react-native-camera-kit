@@ -11,14 +11,15 @@
 typedef void (^CaptureBlock)(NSDictionary *imageObject);
 typedef void (^CallbackBlock)(BOOL success);
 
-typedef NS_ENUM(NSInteger, CKCameraType) {
-    CKCameraTypeBack,
-    CKCameraTypeFront,
+typedef NS_ENUM(NSInteger, CKCameraTorchMode) {
+    CKCameraTorchModeAuto,
+    CKCameraTorchModeOn,
+    CKCameraTorchModeOff
 };
 
-@interface RCTConvert(CKCameraType)
+@interface RCTConvert(CKCameraTorchMode)
 
-+ (CKCameraType)CKCameraType:(id)json;
++ (CKCameraTorchMode)CKCameraTorchMode:(id)json;
 
 @end
 
@@ -34,25 +35,15 @@ typedef NS_ENUM(NSInteger, CKCameraFlashMode) {
 
 @end
 
-typedef NS_ENUM(NSInteger, CKCameraTorchMode) {
-    CKCameraTorchModeOn,
-    CKCameraTorchModeOff
+
+typedef NS_ENUM(NSInteger, CKCameraFocushMode) {
+    CKCameraFocushModeOn,
+    CKCameraFocushModeOff,
 };
 
-@interface RCTConvert(CKCameraTorchMode)
+@interface RCTConvert(CKCameraFocushMode)
 
-+ (CKCameraTorchMode)CKCameraTorchMode:(id)json;
-
-@end
-
-typedef NS_ENUM(NSInteger, CKCameraFocusMode) {
-    CKCameraFocusModeOn,
-    CKCameraFocusModeOff,
-};
-
-@interface RCTConvert(CKCameraFocusMode)
-
-+ (CKCameraFocusMode)CKCameraFocusMode:(id)json;
++ (CKCameraFocushMode)CKCameraFocushMode:(id)json;
 
 @end
 
@@ -75,7 +66,12 @@ typedef NS_ENUM(NSInteger, CKCameraZoomMode) {
 
 // api
 - (void)snapStillImage:(NSDictionary*)options success:(CaptureBlock)block onError:(void (^)(NSString*))onError;
+- (void)changeCamera:(CallbackBlock)block;
+- (void)setFlashMode:(AVCaptureFlashMode)flashMode callback:(CallbackBlock)block;
+- (void)setTorchMode:(AVCaptureTorchMode)torchMode callback:(CallbackBlock)block;
+- (void)setRatio:(NSString*)ratioString;
 
 + (NSURL*)saveToTmpFolder:(NSData*)data;
+
 
 @end
