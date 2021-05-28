@@ -335,6 +335,16 @@ public class CameraViewManager extends SimpleViewManager<CameraView> {
         view.setSurfaceBgColor(color);
     }
 
+    @ReactProp(name = "offsetFrame", defaultDouble = 0)
+    public void setOffsetFrame(CameraView view, double offsetFrame) {
+        view.setOffsetFrame(offsetFrame);
+    }
+
+    @ReactProp(name = "frameHeight", defaultDouble = 0)
+    public void setFrameHeight(CameraView view, double frameHeight) {
+        view.setFrameHeight(frameHeight);
+    }
+
     public static synchronized Rect getFramingRectInPreview(int previewWidth, int previewHeight) {
         return cameraViews.peek().getFramingRectInPreview(previewWidth, previewHeight);
     }

@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import androidx.annotation.ColorInt;
+
 import android.view.View;
 
 
@@ -16,8 +17,11 @@ public class BarcodeFrame extends View {
 
     private static final int STROKE_WIDTH = 5;
     private static final int ANIMATION_SPEED = 8;
-    private static final int WIDTH_SCALE = 7;
-    private static final double HEIGHT_SCALE = 2.75;
+    // private static final int WIDTH_SCALE = 7;
+    // private static final double HEIGHT_SCALE = 2.75;
+
+    private double OFFSET_FRAME = 1;
+    private double FRAME_HEIGHT = 1;
 
     private Paint dimPaint;
     private Paint framePaint;
@@ -31,9 +35,11 @@ public class BarcodeFrame extends View {
     private long previousFrameTime = System.currentTimeMillis();
     private int laserY;
 
-    public BarcodeFrame(Context context) {
+    public BarcodeFrame(Context context, double offsetFrame, double frameHeight) {
         super(context);
         init(context);
+        this.OFFSET_FRAME = offsetFrame;
+        this.FRAME_HEIGHT = frameHeight;
     }
 
     private void init(Context context) {
@@ -59,8 +65,8 @@ public class BarcodeFrame extends View {
 
         width = getMeasuredWidth();
         height = getMeasuredHeight();
-        int marginWidth = width / WIDTH_SCALE;
-        int marginHeight = (int) (height / HEIGHT_SCALE);
+        int marginWidth = OFFSET_FRAME != 1 ? (int) (width * (1-OFFSET_FRAME)/2) : 0;
+        int marginHeight = FRAME_HEIGHT != 1 ? (int) (height * (1-FRAME_HEIGHT)/2) : 0;
 
         frameRect.left = marginWidth;
         frameRect.right = width - marginWidth;
@@ -108,4 +114,12 @@ public class BarcodeFrame extends View {
     public void setLaserColor(@ColorInt int laserColor) {
         laserPaint.setColor(laserColor);
     }
+
+    public void setOffsetFrame(double offsetFrame) {
+        this.OFFSET_FRAME = offsetFrame;
+    }
+
+    public void setFrameHeight(double frameHeight) {
+        this.FRAME_HEIGHT = frameHeight;
+    }    
 }
