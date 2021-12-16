@@ -171,7 +171,7 @@ public class CameraViewManager extends SimpleViewManager<CameraView> {
                             camera.setPreviewDisplay(cameraViews.peek().getHolder());
                             camera.startPreview();
                             if (shouldScan) {
-                                camera.setOneShotPreviewCallback(previewCallback);
+                                // camera.setOneShotPreviewCallback(previewCallback);
                             }
                             cameraViews.peek().setSurfaceBgColor(Color.TRANSPARENT);
                             cameraViews.peek().showFrame();
@@ -311,7 +311,7 @@ public class CameraViewManager extends SimpleViewManager<CameraView> {
     public void setShouldScan(CameraView view, boolean scanBarcode) {
         shouldScan = scanBarcode;
         if (shouldScan && camera != null) {
-            camera.setOneShotPreviewCallback(previewCallback);
+            // camera.setOneShotPreviewCallback(previewCallback);
         }
     }
 

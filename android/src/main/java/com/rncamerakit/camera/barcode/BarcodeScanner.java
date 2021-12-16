@@ -87,7 +87,7 @@ public class BarcodeScanner {
                     }
                 });
             }
-            camera.setOneShotPreviewCallback(previewCallback);
+            // camera.setOneShotPreviewCallback(previewCallback);
         } catch (RuntimeException e) {
             Log.w("CameraKit", e.toString());
         }
